@@ -1,0 +1,31 @@
+# ---- Viva / teaching notes: NEVER commit (personal study material) ----
+VIVA_PREP.md
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.Python
+
+# ---- Environment ----
+.env
+
+# ---- Data: full generated dataset + SQLite DB are large / reproducible ----
+data/queries.csv
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+*.sqlite3
+
+# ---- Editor / OS ----
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ---- Benchmark raw output (report is committed, raw logs are not) ----
+benchmark_raw_*.json

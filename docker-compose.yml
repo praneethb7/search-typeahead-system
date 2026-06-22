@@ -1,0 +1,32 @@
+# Three independent Redis instances act as the THREE logical cache nodes of our
+# distributed cache. They share nothing — our own consistent-hash ring (in
+# backend/cache/ring.py) decides which node owns each prefix key.
+#
+#   docker compose up -d      # start all 3
+#   docker compose ps         # verify
+#   docker compose down       # stop & remove
+#
+# Each node is capped and uses LRU eviction so the cache can never grow forever
+# (demonstrates the "eviction" half of the caching topic, alongside our TTLs).
+
+services:
+  redis-c0:
+    image: redis:7-alpine
+    container_name: typeahead-redis-c0
+    command: redis-server --maxmemory 64mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+
+  redis-c1:
+    image: redis:7-alpine
+    container_name: typeahead-redis-c1
+    command: redis-server --maxmemory 64mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6380:6379"
+
+  redis-c2:
+    image: redis:7-alpine
+    container_name: typeahead-redis-c2
+    command: redis-server --maxmemory 64mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6381:6379"

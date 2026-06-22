@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aperture · instant search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-dot"></span>
+        </span>
+        <span class="brand-name">Aperture</span>
+        <span class="brand-sub">search&nbsp;index</span>
+      </a>
+      <nav class="meta-nav" aria-hidden="true">
+        <span class="tag">prefix&nbsp;trie</span>
+        <span class="tag">top&#8209;10</span>
+        <span class="tag tag-live"><span class="pulse"></span>redis · live</span>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Typeahead engine</p>
+      <h1 class="headline">
+        Find anything<br />
+        <em>the instant</em> you type.
+      </h1>
+      <p class="subhead">
+        Suggestions rank by all&#8209;time popularity and recent momentum —
+        served from a Redis cache sharded with consistent hashing.
+      </p>
+
+      <div class="search-wrap">
+        <div class="search-row">
+          <div class="combo">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <line x1="16.5" y1="16.5" x2="21" y2="21" />
+            </svg>
+            <input
+              id="search-input"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="try: ip, java, run, pizza, stock"
+              aria-label="Search"
+              aria-autocomplete="list"
+              aria-controls="suggestions"
+            />
+            <kbd class="kbd" aria-hidden="true">/</kbd>
+            <ul id="suggestions" class="suggestions hidden" role="listbox"></ul>
+          </div>
+          <button id="search-btn" type="button">
+            <span>Search</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </button>
+        </div>
+
+        <label class="toggle">
+          <input type="checkbox" id="recency-toggle" checked />
+          <span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
+          <span class="toggle-text">Recency&#8209;aware ranking</span>
+          <span class="hint">off = pure all&#8209;time count</span>
+        </label>
+      </div>
+
+      <div id="status" class="status" aria-live="polite"></div>
+      <div id="response" class="response hidden"></div>
+    </section>
+
+    <section class="trending">
+      <div class="section-head">
+        <h2 class="section-title">Trending now</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+      <ul id="trending-list" class="trending-list">
+        <li class="muted">No trending data yet — submit some searches.</li>
+      </ul>
+    </section>
+
+    <footer class="foot">
+      <span class="foot-brand">Aperture · search typeahead</span>
+      <span class="foot-dim">trie · consistent hashing · batch writes</span>
+    </footer>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Web framework + ASGI server
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# Distributed cache client (3 Redis nodes)
+redis==5.2.1
+
+# Config loading from .env
+python-dotenv==1.0.1
+
+# Async HTTP client used by the benchmark/load-test script
+httpx==0.28.1
